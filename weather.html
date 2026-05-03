@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Weather</title>
+  <link rel="stylesheet" href="new.css">
+</head>
+
+<body>
+<nav>
+  <div class="nav-left">
+    <div class="logo">🌱 Agri Assistant</div>
+
+    <a href="login.html" class="login-icon">
+      <img src="login.png" alt="login">
+    </a>
+  </div>
+
+  <ul>
+    <li><a href="Index.html">Home</a></li>
+    <li><a href="weather.html">Weather</a></li>
+    <li><a href="crops.html">Crops</a></li>
+    <li><a href="dashboard.html">Dashboard</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</nav>
+<section class="weather">
+  <div class="weather-content">
+
+    <h2>🌦️ Weather</h2>
+
+    <div class="search-box">
+      <input type="text" id="cityInput" placeholder="Enter city">
+      <button onclick="getWeather()">Search</button>
+    </div>
+
+    <div class="weather-box" id="weatherBox">
+      <p id="temp"></p>
+      <p id="humidity"></p>
+      <p id="condition"></p>
+    </div>
+
+  </div>
+</section>
+
+  <style>
+  body {
+  margin: 0;
+  font-family: Arial;
+}
+
+.weather {
+  min-height: 100vh;
+  background: url('weather.png') no-repeat center center;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.weather-content {
+  text-align: center;
+  padding: 40px;
+  width: 40%;
+  border-radius: 15px;
+  background: rgba(255,255,255,0.2);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 30px rgba(0,0,0,0.4);
+}
+
+.weather-content h2 {
+  font-size: 35px;
+  color: white;
+}
+
+.search-box {
+  margin-top: 20px;
+}
+
+.search-box input {
+  padding: 12px;
+  width: 60%;
+  border-radius: 8px;
+  border: none;
+}
+
+.search-box button {
+  padding: 12px 20px;
+  border: none;
+  background: green;
+  color: white;
+  border-radius: 8px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.weather-box {
+  margin-top: 30px;
+  padding: 20px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.9);
+  display: none;
+}
+  </style>
+
+ <script>
+const apiKey = "57e036bcb09d361e0b43888b81823c10";
+
+function getWeather() {
+  const city = document.getElementById("cityInput").value;
+
+  if (city === "") {
+    alert("Enter city name ❗");
+    return;
+  }
+
+  fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`)
+  .then(res => res.json())
+  .then(data => {
+
+    console.log(data);
+
+    if (data.cod !== 200) {
+      alert("City not found ❌");
+      return;
+    }
+
+    document.getElementById("temp").innerText =
+      "🌡 Temp: " + data.main.temp + "°C";
+
+    document.getElementById("humidity").innerText =
+      "💧 Humidity: " + data.main.humidity + "%";
+
+    document.getElementById("condition").innerText =
+      "☁️ Condition: " + data.weather[0].main;
+
+    document.querySelector(".weather-box").style.display = "block";
+
+    let temp = data.main.temp;
+    let cityName = data.name;
+
+    localStorage.setItem("temp", temp);
+    localStorage.setItem("city", cityName);
+
+    alert("Weather saved ✅ Now go to crops");
+
+  })
+  .catch(err => {
+    console.log(err);
+    alert("Something went wrong ❌");
+  });
+}
+</script>
+</section>
+</body>
+</html>

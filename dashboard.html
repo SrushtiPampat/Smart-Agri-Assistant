@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="new.css">
+
+<style>
+body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  background: url("image1.png") no-repeat center center/cover;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px;
+  background: rgba(0,0,0,0.7);
+  color: white;
+}
+
+.nav-left {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+ul {
+  display: flex;
+  gap: 15px;
+  list-style: none;
+}
+
+ul li a {
+  color: white;
+  text-decoration: none;
+}
+
+h2 {
+  text-align: center;
+  color: black;
+  margin-top: 100px;
+}
+
+.profile, .info {
+  width: 80%;
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 12px;
+}
+
+.profile {
+  background: rgba(198, 175, 175, 0.6);
+  color: black;
+}
+
+.info {
+  background: rgba(202, 190, 190, 0.6);
+}
+
+.card {
+  .card {
+  background: rgba(198, 175, 175, 0.6);
+  padding: 15px;
+  margin: 15px 0;
+  border-radius: 10px;
+
+  color: #e2d8d8;             
+  font-size: 16px;
+  font-weight: 500;
+}
+}
+</style>
+
+</head>
+
+<body>
+<nav>
+  <div class="nav-left">
+    <div class="logo">🌱 Agri Assistant</div>
+
+    <a href="login.html" class="login-icon">
+      <img src="login.png" alt="login">
+    </a>
+  </div>
+
+  <ul>
+    <li><a href="Index.html">Home</a></li>
+    <li><a href="weather.html">Weather</a></li>
+    <li><a href="crops.html">Crops</a></li>
+    <li><a href="dashboard.html">Dashboard</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</nav>
+<h2>📊 Smart Dashboard</h2>
+
+<div class="profile" id="profile"></div>
+
+<h2>📜 History</h2>
+<div class="info" id="history"></div>
+
+<script>
+window.onload = function () {
+
+  let name = localStorage.getItem("name");
+  let location = localStorage.getItem("location");
+
+  let profileBox = document.getElementById("profile");
+  let historyBox = document.getElementById("history");
+
+  profileBox.innerHTML = `
+    <h3>👤 Profile</h3>
+    <p><b>Name:</b> ${name || "N/A"}</p>
+    <p><b>Location:</b> ${location || "N/A"}</p>
+  `;
+
+  let history = JSON.parse(localStorage.getItem("history")) || [];
+
+  historyBox.innerHTML = "";
+
+  if (history.length === 0) {
+    historyBox.innerHTML = "<p>No history available</p>";
+    return;
+  }
+
+  history.reverse().forEach(item => {
+
+    historyBox.innerHTML += `
+      <div class="card">
+        <p>🌡 ${item.temp} °C | ${item.cropType}</p>
+        <p>🌱 ${item.suggestions.join(", ")}</p>
+        <p style="font-size:12px; color:gray;">${item.time}</p>
+      </div>
+    `;
+  });
+};
+</script>
+
+</body>
+</html>

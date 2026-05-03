@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Weather</title>
+  <link rel="stylesheet" href="new.css">
+</head>
+
+<body>
+<nav>
+  <div class="logo">🌱 Agri Assistant</div>
+  <ul>
+    <li><a href="Index.html">Home</a></li>
+    <li><a href="weather.html">Weather</a></li>
+    <li><a href="crops.html">Crops</a></li>
+    <li><a href="dashboard.html">Dashboard</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</nav>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      text-align: center;
+
+      background: url('image1.png') no-repeat center center fixed;
+      background-size: cover;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.3);
+      z-index: -1;
+    }
+
+    h2 {
+      margin-top: 240px;
+      font-size: 34px;
+      color: white;
+    }
+
+    .input-box {
+      margin-top: 20px;
+    }
+
+    input {
+      padding: 24px;
+      width: 260px;
+      border-radius: 8px;
+      border: none;
+      outline: none;
+      font-size: 14px;
+    }
+
+    button {
+      padding: 12px 20px;
+      margin-left: 10px;
+      border: none;
+      background: #2e7d32;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    button:hover {
+      background: #1b5e20;
+    }
+
+    .fruit-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 40px;
+
+      width: 95%;
+      max-width: 1400px;
+      margin: 50px auto;
+    }
+    .fruit-card {
+      background: white;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      transition: 0.3s;
+    }
+
+    .fruit-card:hover {
+      transform: scale(1.05);
+    }
+
+    .fruit-card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 12px;
+    }
+
+    .fruit-card p {
+      margin-top: 12px;
+      font-weight: bold;
+      font-size: 18px;
+    }
+  </style>
+</head>
+
+<body>
+
+<h2>🍎 Fruit Suggestion</h2>
+
+<div class="input-box">
+  <input type="number" id="tempInput" placeholder="Enter temperature (°C)">
+  <button onclick="suggestFruit()">Get Suggestion</button>
+</div>
+
+<div id="result" class="fruit-container"></div>
+
+<script>
+function suggestFruit() {
+
+  let result = document.getElementById("result");
+
+  let tempInput = document.getElementById("tempInput").value;
+  let temp = tempInput ? parseFloat(tempInput) : parseFloat(localStorage.getItem("temp"));
+
+  if (!temp) {
+    alert("⚠ Please check weather or enter temperature");
+    return;
+  }
+
+  let fruits = [];
+
+  if (temp > 30) {
+    fruits = [
+      {name: "Mango", img: "mango.png"},
+      {name: "Watermelon", img: "watermelon.png"},
+      {name: "Papaya", img: "papaya.png"}
+    ];
+  } 
+  else if (temp >= 20) {
+    fruits = [
+      {name: "Apple", img: "apple.png"},
+      {name: "Banana", img: "banana.png"},
+      {name: "Guava", img: "guava.png"}
+    ];
+  } 
+  else {
+    fruits = [
+      {name: "Orange", img: "orange.png"},
+      {name: "Strawberry", img: "strawberry.png"},
+      {name: "Grapes", img: "grapes.png"}
+    ];
+  }
+
+  result.innerHTML = "";
+
+  fruits.forEach(fruit => {
+    result.innerHTML += `
+      <div class="fruit-card">
+        <img src="${fruit.img}">
+        <p>${fruit.name}</p>
+      </div>
+    `;
+  });
+
+  let history = JSON.parse(localStorage.getItem("history")) || [];
+
+  history.push({
+    temp: temp,
+    cropType: "Fruits",
+    suggestions: fruits.map(f => f.name),
+    time: new Date().toLocaleString()
+  });
+
+  localStorage.setItem("history", JSON.stringify(history));
+
+  console.log("Saved to history ✅");
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="new.css">
+</head>
+<body>
+<nav>
+  <div class="nav-left">
+    <div class="logo">🌱 Agri Assistant</div>
+
+    <a href="login.html" class="login-icon">
+      <img src="login.png" alt="login">
+    </a>
+  </div>
+
+  <ul>
+    <li><a href="Index.html">Home</a></li>
+    <li><a href="weather.html">Weather</a></li>
+    <li><a href="crops.html">Crops</a></li>
+    <li><a href="dashboard.html">Dashboard</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</nav>
+<section class="categories">
+
+  <h2  font-weight="600">🌾 Crop Categories</h2>
+
+  <div class="category-container">
+    
+    <a href="fruits.html" class="category-card">
+      <img src="fruits.png">
+      <h3>🍎 Fruits</h3>
+    </a>
+
+    <a href="grains.html" class="category-card">
+      <img src="grains.png">
+      <h3>🌾 Grains</h3>
+    </a>
+
+    <a href="vegetables.html" class="category-card">
+      <img src="vegetable.png">
+      <h3>🥕 Vegetables</h3>
+    </a>
+
+  </div>
+
+</section>
+   <style>
+
+body {
+  margin: 0;
+}
+
+.categories {
+  min-height: 100vh;  
+  padding: 100px 20px;
+  background: 
+    linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
+    url("image1.png");
+text-align: center;
+  background-size: cover;     
+  background-position: center;
+  background-repeat: no-repeat;
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.categories h2 {
+  font-size: 50px;
+  margin-bottom: 60px;
+  color: white;
+}
+
+ .category-container {
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 40px;
+
+  width: 100%;
+  padding: 0 0;
+}
+
+.category-card {
+  background: white;
+  border-radius: 25px;
+  overflow: hidden;
+  text-decoration: none;
+  color: black;
+
+  box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+
+  transition: all 0.3s ease;
+}
+
+.category-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.25);
+}
+
+.category-card img {
+  width: 100%;
+  height: 280px;  
+  object-fit: cover;
+}
+
+.category-card h3 {
+  padding: 25px;
+  font-size: 26px;
+  font-weight: 600;
+}
+</style>
+<script>
+function selectCrop(type) {
+
+  localStorage.setItem("cropType", type);
+
+  let temp = localStorage.getItem("temp");
+
+  if (!temp) {
+    alert("⚠ Please check weather first!");
+    return;
+  }
+
+  localStorage.setItem("temp", temp);
+
+  console.log("Crop:", type);
+  console.log("Temp:", temp);
+
+}
+</script>
+  </div>
+</section>
+</body>
+</html>
+

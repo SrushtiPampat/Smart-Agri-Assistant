@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Contact Us - Smart Agri</title>
+  <link rel="stylesheet" href="new.css">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: url(image1.png) no-repeat center center fixed;
+      background-size: cover;
+    }
+
+    .header {
+      text-align: center;
+      padding: 120px 20px 40px;
+      color: white;
+      font-size: 32px;
+      font-weight: 600;
+    }
+
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    .info {
+      background: rgba(140, 138, 138, 0.5);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.2);
+      padding: 25px;
+      border-radius: 30px;
+      width: 400px;
+      color: white;
+    }
+
+    .info h3 {
+      color: #90ee90;
+      margin-top: 20px;
+    }
+
+    .form {
+      background: rgba(0,0,0,0.4);
+      backdrop-filter: blur(10px);
+      padding: 25px;
+      border-radius: 20px;
+      width: 500px;
+      color: white;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 10px;
+      border: none;
+      outline: none;
+    }
+
+    button {
+      width: 100%;
+      padding: 15px;
+      background: #2e7d32;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #1b5e20;
+    }
+  </style>
+</head>
+
+<body>
+
+<nav>
+  <div class="nav-left">
+    <div class="logo">🌱 Agri Assistant</div>
+
+    <a href="login.html" class="login-icon">
+      <img src="login.png" alt="login">
+    </a>
+  </div>
+
+  <ul>
+    <li><a href="Index.html">Home</a></li>
+    <li><a href="weather.html">Weather</a></li>
+    <li><a href="crops.html">Crops</a></li>
+    <li><a href="dashboard.html">Dashboard</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="header">
+  📞 Contact Us
+</div>
+
+<div class="container">
+  <div class="info">
+    <h3>📍 Our Details</h3>
+    <p>📧 Email: todekaraditi@gmail.com</p>
+    <p>📍 Location: Mumbai, India</p>
+  </div>
+
+  <div class="form">
+    <h3>📝 Send Message</h3>
+
+    <input type="text" id="name" placeholder="Your Name">
+    <input type="email" id="email" placeholder="Your Email">
+    <textarea id="message" placeholder="Your Message"></textarea>
+
+    <button onclick="sendMessage()">Submit</button>
+  </div>
+
+</div>
+
+<!-- EMAILJS SCRIPT -->
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script>
+function sendMessage() {
+
+  let name = document.getElementById("name").value;
+  let email = document.getElementById("email").value;
+  let message = document.getElementById("message").value;
+
+  if (!name || !email || !message) {
+    alert("Fill all fields ❗");
+    return;
+  }
+
+  let messages = JSON.parse(localStorage.getItem("messages")) || [];
+
+  messages.push({
+    name: name,
+    email: email,
+    message: message,
+    time: new Date().toLocaleString()
+  });
+  localStorage.setItem("messages", JSON.stringify(messages));
+
+  alert("Message saved successfully ✅");
+
+  document.getElementById("name").value = "";
+  document.getElementById("email").value = "";
+  document.getElementById("message").value = "";
+}
+</script>
+</body>
+</html>

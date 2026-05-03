@@ -1,0 +1,142 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+nav {
+   position: fixed;
+  top: 0;
+  width: 100%;
+  height: 90px; 
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 50px;
+  
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+}
+
+.logo {
+  color: #fff;
+  font-size: 1rem; 
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  font-size: larger;
+  gap:40px;
+}
+
+nav ul li {
+  margin-left: 100px;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.hero {
+  height: 100vh;
+  background: url(image1.png) no-repeat center/cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+}
+
+.hero-content {
+  position: relative;
+  color: white;
+  text-align: center;
+}
+
+.hero-content h1 {
+  font-size: 3rem;
+}
+
+.hero-content p {
+  margin-top: 10px;
+  font-size: 1.2rem;
+}
+
+.info {
+  position: relative;
+  padding: 100px 30px;
+  text-align: center;
+  color: white;
+
+  background: url('farm-bg.jpg') no-repeat center/cover;
+}
+
+.info::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+}
+
+.info * {
+  position: relative;
+}
+
+.info h2 {
+  margin-bottom: 20px;
+  font-size: 2rem;
+}
+
+.info p {
+  max-width: 700px;
+  margin: auto;
+  line-height: 1.6;
+}
+
+footer {
+  background: #1b5e20;
+  color: white;
+  text-align: center;
+  padding: 15px;
+}
+.login-icon {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+}
+
+.login-icon img {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  border: 3px solid #7CFC00;  
+  object-fit: cover;
+
+}
+
+.login-icon span {
+  color: #7CFC00;
+  font-size: 14px;
+}
