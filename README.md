@@ -1,7 +1,7 @@
 # Smart Agri Assistant
 
 ## Team Members
-- Shrushti Pampat
+- Srushti Pampat
 - Aditi Todekar
 - Anjali Anpat
 
